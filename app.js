@@ -283,7 +283,7 @@ app.post('/Addevent', async (req, res) => {
         console.log(req.body.food)
         const database = db.getDb().db("AlumniTracking");
         await database.collection("Events").insert(req.body.food);
-        res.send("Inserted")
+        res.redirect(`/Addevent`)
     } catch (error) {
 
     }
