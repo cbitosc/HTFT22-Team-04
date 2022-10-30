@@ -1,4 +1,16 @@
 # HTFT22-Team-04
+ 
+# Alumni Tracking System 
+### Team Members : **Koppu Eshwar**, **Ameya**,**Harsha Vardhan** , **Affan** , **Shiva Theja**
+
+## ***Technologies used*** : <br> 
+> *HTML*,
+> *CSS*,
+> JavaScript,
+> Ejs,
+> MongoDB,
+> NodeJs.
+
 ![image](https://user-images.githubusercontent.com/105587806/198870015-d0c95d4a-a9f0-47ad-9e61-deedfc6e7188.png)
 ![image](https://user-images.githubusercontent.com/105587806/198870038-07c08dde-6d07-4f90-b9b6-b54a9d7b65de.png)
 ![image](https://user-images.githubusercontent.com/105587806/198870047-4044b1d9-871f-4ae5-8f65-25770c76d2b3.png)
