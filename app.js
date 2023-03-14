@@ -56,71 +56,56 @@ app.get('/home', async (req, res) => {
         const eventList = await database.collection("Events").find().toArray();
         const { title } = req.query;
         if (title) {
-            const event = await database.collection("Events").find({ _id: ObjectId(title) }).toArray()
+            console.log(title,typeof(title))
+            const event = await database.collection("Events").find({ title:title }).toArray()
             const eventList = event
             res.render("home", { eventList })
-            
         }
         else {
             res.render("home", { eventList })
-        }}
-   
+        }
+    }
 })
-
-
-
-
-
 
 app.post('/home', async (req, res) => {
 
-    if( (req.body.username)==='admin')
-    {
-
-    try {
-        const database = db.getDb().db("AlumniTracking")
-        const eventList = await database.collection("Events").find().toArray();
-        const { title } = req.query;
-        if (title) {
-            const event = await database.collection("Events").find({ _id: ObjectId(title) }).toArray()
-            const eventList = event
-            res.render("home", { eventList })
-            console.log(eventList)
+    if ((req.body.username) === 'admin') {
+        console.log("Now in admin");
+        try {
+            console.log("Now in admin");
+            const database = db.getDb().db("AlumniTracking")
+            const eventList = await database.collection("Events").find().toArray();
+            const { title } = req.query;
+            if (title) {
+                const event = await database.collection("Events").find({ title:title }).toArray()
+                const eventList = event
+                res.render("home", { eventList })
+            }
+            else {
+                res.render("home", { eventList });
+            }
         }
-        else {
-            res.render("home", { eventList })
+        catch (err) {
+
         }
     }
-    catch (err) {
 
-        
+    else if (req.body.username.includes("1601")) {
+        try {
+            let id = req.body.username
+            const database = db.getDb().db("AlumniTracking")
+            const lst = await database.collection("Alumni").find({ year: 2024, rollno: id }).toArray();
+            const rollno = lst[0].rollno
+            const career = lst[0].careerflow
+            const x = 1
+            const name = lst[0].name
+            const branch = lst[0].Bs
+            res.render('progress', { career, rollno, x, branch, name })
+        } catch (error) {
 
+        }
     }
-}
-
-else if (req.body.username.includes("1601"))
-{
-    try {
-        let id = req.body.username
-        const database = db.getDb().db("AlumniTracking")
-        
-
-        const lst = await database.collection("Alumni").find({ year: 2024, rollno: id }).toArray();
-        const rollno = lst[0].rollno
-        const career = lst[0].careerflow
-        const x=1
-        const name = lst[0].name
-        const branch = lst[0].Bs
-        res.render('progress', { career, rollno,x,branch,name })
-
-
-    } catch (error) {
-        
-    }
-}
 })
-
-
 
 app.post('/mail/:id', async (req, res) => {
      
