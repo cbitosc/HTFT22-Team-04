@@ -37,6 +37,20 @@ app.get('/', async (req, res) => {
     res.render("login")
    
 })
+
+
+
+app.get('/delete/:id', async (req, res) => {
+    const database = db.getDb().db("AlumniTracking")
+   await database.collection("Events").deleteOne({_id:ObjectId(req.params.id)})
+   const eventList = await database.collection("Events").find().toArray();
+   res.redirect(`/home`);
+
+
+   
+})
+
+
 app.get('/addevent', async (req, res) => {
     res.render("Add.ejs")
    
@@ -47,6 +61,7 @@ app.get('/addevent', async (req, res) => {
 
 app.get('/logout', async (req, res) => {
     res.render("login")
+
    
 })
 
