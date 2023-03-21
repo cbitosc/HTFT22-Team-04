@@ -65,6 +65,27 @@ app.get('/logout', async (req, res) => {
    
 })
 
+
+
+app.get('/shome', async (req, res) => {
+    {
+        const database = db.getDb().db("AlumniTracking")
+        const eventList = await database.collection("Events").find().toArray();
+        const { title } = req.query;
+        if (title) {
+            console.log(title,typeof(title))
+            const event = await database.collection("Events").find({ title:title }).toArray()
+            const eventList = event
+            res.render("shome", { eventList })
+        }
+        else {
+            res.render("shome", { eventList })
+        }
+    }
+})
+
+
+
 app.get('/home', async (req, res) => {
     {
         const database = db.getDb().db("AlumniTracking")
